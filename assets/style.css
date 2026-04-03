@@ -193,3 +193,41 @@ body {
   transform: translateY(-5px);
   box-shadow: 0 20px 40px rgba(0,0,0,0.15);
 }
+
+.how-it-works {
+  padding: 100px 20px;
+  background: #fff;
+  text-align: center;
+}
+
+.how-it-works h2 {
+  font-size: 36px;
+  margin-bottom: 60px;
+}
+
+.steps {
+  display: flex;
+  gap: 30px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.step {
+  background: #f9f9f9;
+  padding: 30px;
+  border-radius: 12px;
+  max-width: 300px;
+}
+
+.step-number {
+  width: 50px;
+  height: 50px;
+  background: #d4a017;
+  color: #fff;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  margin: 0 auto 20px;
+}
