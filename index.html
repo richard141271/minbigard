@@ -57,6 +57,17 @@ fetch('/sections/benefits.no.html')
     document.getElementById('trust-section').innerHTML = html;
   });
 </script>
+
+<!-- HOW IT WORKS -->
+<div id="how-section"></div>
+
+<script>
+fetch('/sections/how-it-works.no.html')
+  .then(res => res.text())
+  .then(html => {
+    document.getElementById('how-section').innerHTML = html;
+  });
+</script>
   
 </body>
 </html>
