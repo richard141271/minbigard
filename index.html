@@ -21,6 +21,17 @@
       Et komplett pollineringsprogram med honning, sertifisering og ESG-rapportering.
     </p>
 
+<!-- VALUE -->
+<div id="value-section"></div>
+
+<script>
+fetch('/sections/value.no.html')
+  .then(res => res.text())
+  .then(html => {
+    document.getElementById('value-section').innerHTML = html;
+  });
+</script>
+    
     <div class="hero-buttons">
       <a class="cta-button" href="/no/kontakt.html">
         Book demo
