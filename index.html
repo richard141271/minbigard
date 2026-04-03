@@ -47,5 +47,16 @@ fetch('/sections/value.no.html')
   });
 </script>
 
+<!-- TRUST -->
+<div id="trust-section"></div>
+
+<script>
+fetch('/sections/benefits.no.html')
+  .then(res => res.text())
+  .then(html => {
+    document.getElementById('trust-section').innerHTML = html;
+  });
+</script>
+  
 </body>
 </html>
