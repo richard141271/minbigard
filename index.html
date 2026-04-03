@@ -11,8 +11,10 @@
 
 <body>
 
+<!-- HERO -->
 <section class="hero">
   <div class="hero-content">
+
     <h1>
       Få deres egen bedriftsbigård – og dokumenter miljøinnsatsen deres
     </h1>
@@ -20,13 +22,21 @@
     <p>
       Et komplett pollineringsprogram med honning, sertifisering og ESG-rapportering.
     </p>
-    
+
     <div class="hero-buttons">
       <a class="cta-button" href="/no/kontakt.html">
         Book demo
       </a>
 
-<!-- VALUE -->
+      <a class="cta-secondary" href="/no/tjenester.html">
+        Se hvordan det fungerer
+      </a>
+    </div>
+
+  </div>
+</section>
+
+<!-- VALUE (EGEN SEKSJON) -->
 <div id="value-section"></div>
 
 <script>
@@ -36,13 +46,6 @@ fetch('/sections/value.no.html')
     document.getElementById('value-section').innerHTML = html;
   });
 </script>
-      
-      <a class="cta-secondary" href="/no/tjenester.html">
-        Se hvordan det fungerer
-      </a>
-    </div>
-  </div>
-</section>
 
 </body>
 </html>
