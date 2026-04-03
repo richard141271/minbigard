@@ -231,3 +231,23 @@ body {
   font-weight: bold;
   margin: 0 auto 20px;
 }
+.cta {
+  padding: 100px 20px;
+  background: #d4a017;
+  color: #fff;
+  text-align: center;
+}
+
+.cta h2 {
+  font-size: 36px;
+  margin-bottom: 20px;
+}
+
+.cta p {
+  margin-bottom: 30px;
+}
+
+.cta .cta-button {
+  background: #fff;
+  color: #000;
+}
