@@ -97,3 +97,14 @@ body {
 .value-item h3 {
   margin-bottom: 10px;
 }
+
+.value-item {
+  background: #fff;
+  padding: 30px;
+  border-radius: 12px;
+  transition: 0.3s;
+}
+
+.value-item:hover {
+  transform: translateY(-5px);
+}
