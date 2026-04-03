@@ -346,3 +346,212 @@ body {
   background: #fff;
   color: #000;
 }
+
+.home {
+  background: #0b0c10;
+  color: #eaeaea;
+}
+
+.home .site-header {
+  background: rgba(15, 17, 23, 0.85);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(10px);
+}
+
+.home .logo a,
+.home .main-nav a {
+  color: #fff;
+}
+
+.home .main-nav a:hover {
+  text-decoration: none;
+  opacity: 0.85;
+}
+
+.hero::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(circle at 20% 25%, rgba(212, 160, 23, 0.30), transparent 40%),
+    radial-gradient(circle at 80% 20%, rgba(255, 255, 255, 0.10), transparent 45%),
+    radial-gradient(circle at 70% 80%, rgba(212, 160, 23, 0.20), transparent 40%),
+    linear-gradient(180deg, rgba(0, 0, 0, 0.10), rgba(0, 0, 0, 0.55));
+  mix-blend-mode: screen;
+  pointer-events: none;
+}
+
+.hero-kicker {
+  display: inline-block;
+  padding: 8px 12px;
+  border-radius: 999px;
+  background: rgba(212, 160, 23, 0.20);
+  border: 1px solid rgba(212, 160, 23, 0.35);
+  color: #fff;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  font-weight: 700;
+  font-size: 12px;
+  margin-bottom: 16px;
+}
+
+.hero-badges {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  justify-content: center;
+  margin: 0 0 24px;
+}
+
+.badge {
+  padding: 9px 12px;
+  border-radius: 999px;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  background: rgba(0, 0, 0, 0.25);
+  font-weight: 600;
+  font-size: 14px;
+}
+
+.cta-button {
+  transition: transform 0.15s ease, box-shadow 0.15s ease, opacity 0.15s ease;
+}
+
+.cta-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 18px 40px rgba(0,0,0,0.25);
+}
+
+.cta-secondary {
+  transition: transform 0.15s ease, opacity 0.15s ease;
+}
+
+.cta-secondary:hover {
+  transform: translateY(-2px);
+  opacity: 0.9;
+}
+
+.image-strip {
+  padding: 36px 20px 70px;
+  background: linear-gradient(180deg, rgba(11, 12, 16, 0.0), rgba(11, 12, 16, 1));
+}
+
+.image-strip-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 18px;
+}
+
+.image-card {
+  margin: 0;
+  border-radius: 18px;
+  overflow: hidden;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.10);
+  transform: translateY(0);
+  transition: transform 0.18s ease, box-shadow 0.18s ease;
+}
+
+.image-card img {
+  width: 100%;
+  height: 220px;
+  display: block;
+  object-fit: cover;
+  object-position: center;
+  filter: saturate(1.05) contrast(1.05);
+}
+
+.image-card figcaption {
+  padding: 12px 14px;
+  font-weight: 700;
+  color: #fff;
+}
+
+.image-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 24px 60px rgba(0,0,0,0.35);
+}
+
+.image-card img.shift-1 {
+  object-position: 50% 35%;
+}
+
+.image-card img.shift-2 {
+  object-position: 50% 65%;
+}
+
+.home .value,
+.home .trust,
+.home .how-it-works {
+  background: #0f1117;
+  color: #eaeaea;
+}
+
+.home .trust {
+  background: #0b0c10;
+}
+
+.home .value-item,
+.home .trust-item,
+.home .step {
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.10);
+  box-shadow: none;
+}
+
+.home .value-item:hover,
+.home .trust-item:hover,
+.home .step:hover {
+  box-shadow: 0 24px 60px rgba(0,0,0,0.35);
+}
+
+.home .cta {
+  background: linear-gradient(135deg, #d4a017 0%, #ffcc33 100%);
+  color: #111;
+}
+
+.home .cta .cta-button {
+  background: #111;
+  color: #fff;
+}
+
+.home .cta-secondary {
+  border-color: rgba(255, 255, 255, 0.6);
+}
+
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .home .hero-content {
+    animation: fadeUp 0.7s ease both;
+  }
+  .home .image-card {
+    animation: fadeUp 0.7s ease both;
+  }
+  .home .image-card:nth-child(2) {
+    animation-delay: 0.08s;
+  }
+  .home .image-card:nth-child(3) {
+    animation-delay: 0.16s;
+  }
+}
+
+@media (max-width: 900px) {
+  .image-strip-grid {
+    grid-template-columns: 1fr;
+  }
+  .image-card img {
+    height: 210px;
+  }
+  .hero-buttons {
+    flex-direction: column;
+  }
+}
