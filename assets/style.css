@@ -491,6 +491,47 @@ body {
   line-height: 1.7;
 }
 
+.note {
+  background: rgba(255, 255, 255, 0.85);
+  border: 1px solid rgba(17, 17, 17, 0.08);
+  border-left: 4px solid #d4a017;
+  border-radius: 10px;
+  padding: 14px 16px;
+}
+
+.prices {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 14px;
+}
+
+.price-card {
+  background: rgba(255, 255, 255, 0.9);
+  border: 1px solid rgba(17, 17, 17, 0.08);
+  border-radius: 12px;
+  padding: 16px;
+}
+
+.price-card h3 {
+  margin: 0 0 8px;
+}
+
+.gallery {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 12px;
+  margin: 14px 0;
+}
+
+.gallery img {
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+  border-radius: 12px;
+  border: 1px solid rgba(17, 17, 17, 0.10);
+  background: #fff;
+}
+
 @media (prefers-reduced-motion: no-preference) {
   .page-hero .container {
     animation: fadeUp 0.7s ease both;
