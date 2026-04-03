@@ -68,6 +68,17 @@ fetch('/sections/how-it-works.no.html')
     document.getElementById('how-section').innerHTML = html;
   });
 </script>
+
+<!-- CTA -->
+<div id="cta-section"></div>
+
+<script>
+fetch('/sections/cta.no.html')
+  .then(res => res.text())
+  .then(html => {
+    document.getElementById('cta-section').innerHTML = html;
+  });
+</script>
   
 </body>
 </html>
