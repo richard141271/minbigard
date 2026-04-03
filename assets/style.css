@@ -146,3 +146,16 @@ body {
   font-weight: bold;
   margin: 0 auto 15px;
 }
+
+.value-item {
+  background: #fff;
+  padding: 30px;
+  border-radius: 12px;
+  transition: 0.3s;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.05);
+}
+
+.value-item:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+}
