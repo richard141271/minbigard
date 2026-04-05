@@ -532,6 +532,26 @@ body {
   background: #fff;
 }
 
+.poster-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 12px;
+  margin: 14px 0;
+}
+
+.poster-grid figure {
+  margin: 0;
+}
+
+.poster-grid img {
+  width: 100%;
+  aspect-ratio: 3 / 4;
+  object-fit: cover;
+  border-radius: 12px;
+  border: 1px solid rgba(17, 17, 17, 0.10);
+  background: #fff;
+}
+
 @media (prefers-reduced-motion: no-preference) {
   .page-hero .container {
     animation: fadeUp 0.7s ease both;
