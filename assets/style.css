@@ -552,6 +552,125 @@ body {
   background: #fff;
 }
 
+.founder-story {
+  margin-top: 48px;
+  padding: 28px;
+  background: #fff;
+  border: 1px solid rgba(17, 17, 17, 0.10);
+  border-radius: 14px;
+  border-left: 4px solid #d4a017;
+}
+
+.founder-story h2 {
+  margin-top: 0;
+}
+
+.founder-story .founder-grid {
+  display: grid;
+  grid-template-columns: 1.1fr 0.9fr;
+  gap: 18px;
+  align-items: start;
+  margin-top: 14px;
+}
+
+.founder-story .quote {
+  margin: 14px 0 0;
+  padding: 14px 16px;
+  background: rgba(17, 17, 17, 0.03);
+  border: 1px solid rgba(17, 17, 17, 0.08);
+  border-radius: 12px;
+  color: #222;
+}
+
+.founder-story .quote p {
+  margin: 0 0 12px;
+  line-height: 1.65;
+}
+
+.founder-story .quote p:last-child {
+  margin-bottom: 0;
+}
+
+.founder-story .quote footer {
+  font-weight: 800;
+  color: #111;
+  margin-top: 10px;
+}
+
+.founder-story .founder-images {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+
+.founder-story .founder-images img {
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+  border-radius: 12px;
+  border: 1px solid rgba(17, 17, 17, 0.10);
+  background: #fff;
+}
+
+.founder-story .founder-images img.logo {
+  grid-column: 1 / -1;
+  aspect-ratio: 16 / 9;
+  object-fit: contain;
+  background: rgba(17, 17, 17, 0.03);
+}
+
+.home .tech-trust {
+  margin-top: 36px;
+  padding: 24px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  border-radius: 14px;
+  display: grid;
+  grid-template-columns: 1.1fr 0.9fr;
+  gap: 18px;
+  align-items: center;
+}
+
+.home .tech-trust h3 {
+  margin: 0 0 8px;
+  font-size: 18px;
+  color: #fff;
+}
+
+.home .tech-trust p {
+  margin: 0;
+  font-size: 15px;
+  color: rgba(255, 255, 255, 0.85);
+  line-height: 1.6;
+}
+
+.home .tech-trust-images {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+
+.home .tech-trust-images img {
+  width: 100%;
+  height: 120px;
+  object-fit: cover;
+  border-radius: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  background: rgba(0, 0, 0, 0.20);
+}
+
+@media (max-width: 980px) {
+  .founder-story .founder-grid {
+    grid-template-columns: 1fr;
+  }
+  .home .tech-trust {
+    grid-template-columns: 1fr;
+  }
+  .home .tech-trust-images img {
+    height: 160px;
+  }
+}
+
 @media (prefers-reduced-motion: no-preference) {
   .page-hero .container {
     animation: fadeUp 0.7s ease both;
