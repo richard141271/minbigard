@@ -32,23 +32,23 @@
             <div class="form-grid">
               <div class="field">
                 <label for="companyName">Firmanavn</label>
-                <input id="companyName" name="companyName" type="text" autocomplete="organization" required>
+                <input id="companyName" name="firmanavn" type="text" autocomplete="organization" required>
               </div>
               <div class="field">
                 <label for="orgNumber">Organisasjonsnummer</label>
-                <input id="orgNumber" name="orgNumber" type="text" inputmode="numeric" pattern="\\d{9}" maxlength="9" autocomplete="off" required>
+                <input id="orgNumber" name="orgnr" type="text" inputmode="numeric" pattern="\\d{9}" maxlength="9" autocomplete="off" required>
               </div>
               <div class="field span-2">
                 <label for="address">Adresse</label>
-                <input id="address" name="address" type="text" autocomplete="street-address" required>
+                <input id="address" name="adresse" type="text" autocomplete="street-address" required>
               </div>
               <div class="field">
                 <label for="postalCode">Postnummer</label>
-                <input id="postalCode" name="postalCode" type="text" inputmode="numeric" pattern="\\d{4}" maxlength="4" autocomplete="postal-code" required>
+                <input id="postalCode" name="postnummer" type="text" inputmode="numeric" pattern="\\d{4}" maxlength="4" autocomplete="postal-code" required>
               </div>
               <div class="field">
                 <label for="city">Sted</label>
-                <input id="city" name="city" type="text" autocomplete="address-level2" required>
+                <input id="city" name="sted" type="text" autocomplete="address-level2" required>
               </div>
             </div>
           </div>
@@ -58,15 +58,15 @@
             <div class="form-grid">
               <div class="field">
                 <label for="contactName">Navn</label>
-                <input id="contactName" name="contactName" type="text" autocomplete="name" required>
+                <input id="contactName" name="kontaktperson" type="text" autocomplete="name" required>
               </div>
               <div class="field">
                 <label for="contactEmail">E-post</label>
-                <input id="contactEmail" name="contactEmail" type="email" autocomplete="email" required>
+                <input id="contactEmail" name="epost" type="email" autocomplete="email" required>
               </div>
               <div class="field">
                 <label for="contactPhone">Telefon</label>
-                <input id="contactPhone" name="contactPhone" type="tel" inputmode="tel" autocomplete="tel" required>
+                <input id="contactPhone" name="telefon" type="tel" inputmode="tel" autocomplete="tel" required>
               </div>
             </div>
           </div>
@@ -76,7 +76,7 @@
             <div class="form-grid">
               <div class="field">
                 <label for="package">Pakke</label>
-                <select id="package" name="package" required>
+                <select id="package" name="pakke" required>
                   <option value="" selected disabled>Velg pakke</option>
                   <option value="6_kuber">6 kuber</option>
                   <option value="8_kuber">8 kuber</option>
@@ -134,28 +134,26 @@
         statusEl.className = 'order-status' + (type ? (' ' + type) : '');
       }
  
+      var isSubmitting = false;
+
       function setBusy(isBusy) {
+        isSubmitting = isBusy;
         submitButton.disabled = isBusy;
-        submitButton.textContent = isBusy ? 'Sender…' : 'Bestill og opprett';
+        submitButton.textContent = isBusy ? 'Oppretter...' : 'Bestill og opprett';
       }
  
       function serialize() {
         var data = new FormData(form);
         return {
-          company: {
-            name: String(data.get('companyName') || '').trim(),
-            orgNumber: String(data.get('orgNumber') || '').trim(),
-            address: String(data.get('address') || '').trim(),
-            postalCode: String(data.get('postalCode') || '').trim(),
-            city: String(data.get('city') || '').trim()
-          },
-          contact: {
-            name: String(data.get('contactName') || '').trim(),
-            email: String(data.get('contactEmail') || '').trim(),
-            phone: String(data.get('contactPhone') || '').trim()
-          },
-          package: String(data.get('package') || '').trim(),
-          acceptedTerms: Boolean(data.get('acceptTerms'))
+          firmanavn: String(data.get('firmanavn') || '').trim(),
+          orgnr: String(data.get('orgnr') || '').trim(),
+          adresse: String(data.get('adresse') || '').trim(),
+          postnummer: String(data.get('postnummer') || '').trim(),
+          sted: String(data.get('sted') || '').trim(),
+          kontaktperson: String(data.get('kontaktperson') || '').trim(),
+          epost: String(data.get('epost') || '').trim(),
+          telefon: String(data.get('telefon') || '').trim(),
+          pakke: String(data.get('pakke') || '').trim()
         };
       }
  
@@ -181,15 +179,16 @@
         packageEl.value = packageEl.value.trim();
 
         if (!form.checkValidity()) {
-          setStatus('Sjekk at alle felter er fylt ut korrekt.', 'error');
+          setStatus('Fyll ut alle felter.', 'error');
           form.reportValidity();
           return false;
         }
         return true;
       }
  
-      form.addEventListener('submit', function (e) {
+      function handleSubmit(e) {
         e.preventDefault();
+        if (isSubmitting) return;
         setStatus('', '');
  
         if (!validate()) {
@@ -199,34 +198,28 @@
         var payload = serialize();
         setBusy(true);
  
-        fetch('/api/create-order', {
+        fetch('https://staging.lekbie.no/api/opprett-kunde', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify(payload)
         })
           .then(function (res) {
-            if (res.ok) return res.json().catch(function () { return {}; });
             return res.json().catch(function () { return {}; }).then(function (body) {
-              var errorMessage = (body && (body.message || body.error)) ? String(body.message || body.error) : 'Noe gikk galt. Prøv igjen, eller ta kontakt.';
-              throw new Error(errorMessage);
+              if (res.ok && body && body.success === true && body.redirectUrl) {
+                window.location.href = body.redirectUrl;
+                return;
+              }
+              throw new Error('Kunne ikke opprette, prøv igjen');
             });
           })
-          .then(function () {
-            form.setAttribute('hidden', 'hidden');
-            setStatus('Takk! Din bedriftsbigård er opprettet. Sjekk e-posten din for tilgang.', 'success');
-          })
           .catch(function (err) {
-            var rawMessage = err && err.message ? String(err.message) : '';
-            var message = rawMessage;
-            if (!message || message === 'Failed to fetch') {
-              message = 'Kunne ikke nå /api/create-order. Sjekk at backend er publisert og at minbigard.no ruter /api/create-order til backend.';
-            }
-            setStatus(message, 'error');
-          })
-          .finally(function () {
+            setStatus('Kunne ikke opprette, prøv igjen', 'error');
             setBusy(false);
-          });
-      });
+          })
+      }
+
+      submitButton.addEventListener('click', handleSubmit);
+      form.addEventListener('submit', handleSubmit);
     })();
   </script>
 </body>
