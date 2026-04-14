@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+  <meta charset="UTF-8">
+  <title>Bestill bedriftsbigård – MinBigård</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="../assets/style.css">
+</head>
+<body class="order-page">
+  <header class="site-header">
+    <div class="container header-content">
+      <div class="logo"><a href="./">MinBigård</a></div>
+      <nav class="main-nav">
+        <a href="./">Hjem</a>
+        <a href="tjenester.html">Tjenester</a>
+        <a href="kunder.html">Kunder</a>
+        <a href="pollineringspartner.html">Sertifisering</a>
+        <a href="om.html">Om oss</a>
+      </nav>
+    </div>
+  </header>
+ 
+  <main class="page">
+    <div class="container">
+      <h1>Bestill bedriftsbigård</h1>
+      <p>Fyll ut skjemaet og klikk én gang. Vi sender bestillingen videre til LEK-Biens Vokter™️ for opprettelse.</p>
+ 
+      <div class="order-card">
+        <form id="orderForm" class="order-form" novalidate>
+          <div class="form-section">
+            <h2>Bedrift</h2>
+            <div class="form-grid">
+              <div class="field">
+                <label for="companyName">Firmanavn</label>
+                <input id="companyName" name="companyName" type="text" autocomplete="organization" required>
+              </div>
+              <div class="field">
+                <label for="orgNumber">Organisasjonsnummer</label>
+                <input id="orgNumber" name="orgNumber" type="text" inputmode="numeric" pattern="\\d{9}" maxlength="9" autocomplete="off" required>
+              </div>
+              <div class="field span-2">
+                <label for="address">Adresse</label>
+                <input id="address" name="address" type="text" autocomplete="street-address" required>
+              </div>
+              <div class="field">
+                <label for="postalCode">Postnummer</label>
+                <input id="postalCode" name="postalCode" type="text" inputmode="numeric" pattern="\\d{4}" maxlength="4" autocomplete="postal-code" required>
+              </div>
+              <div class="field">
+                <label for="city">Sted</label>
+                <input id="city" name="city" type="text" autocomplete="address-level2" required>
+              </div>
+            </div>
+          </div>
+ 
+          <div class="form-section">
+            <h2>Kontaktperson</h2>
+            <div class="form-grid">
+              <div class="field">
+                <label for="contactName">Navn</label>
+                <input id="contactName" name="contactName" type="text" autocomplete="name" required>
+              </div>
+              <div class="field">
+                <label for="contactEmail">E-post</label>
+                <input id="contactEmail" name="contactEmail" type="email" autocomplete="email" required>
+              </div>
+              <div class="field">
+                <label for="contactPhone">Telefon</label>
+                <input id="contactPhone" name="contactPhone" type="tel" inputmode="tel" autocomplete="tel" required>
+              </div>
+            </div>
+          </div>
+ 
+          <div class="form-section">
+            <h2>Valg</h2>
+            <div class="form-grid">
+              <div class="field">
+                <label for="package">Pakke</label>
+                <select id="package" name="package" required>
+                  <option value="" selected disabled>Velg pakke</option>
+                  <option value="6_kuber">6 kuber</option>
+                  <option value="8_kuber">8 kuber</option>
+                  <option value="10_kuber">10 kuber</option>
+                  <option value="honningkollektiv">Honningkollektiv</option>
+                </select>
+              </div>
+            </div>
+          </div>
+ 
+          <div class="agreement">
+            <input id="acceptTerms" name="acceptTerms" type="checkbox" required>
+            <label for="acceptTerms">
+              Jeg godkjenner <a href="avtalevilkar.html" target="_blank" rel="noopener noreferrer">avtalevilkårene</a>
+            </label>
+          </div>
+ 
+          <div class="form-actions">
+            <button id="submitButton" class="cta-button" type="submit">Bestill og opprett</button>
+            <div id="orderStatus" class="order-status" role="status" aria-live="polite"></div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </main>
+ 
+  <footer class="site-footer">
+    <div class="container footer-content">
+      <div>
+        <h4>MinBigård</h4>
+        <p>Bedriftsbigård med honning og dokumenterbar ESG-verdi.</p>
+      </div>
+      <div>
+        <h4>Kontakt</h4>
+        <p><a href="mailto:kontakt@aiinnovate.no">kontakt@aiinnovate.no</a></p>
+      </div>
+      <div>
+        <h4>Snarveier</h4>
+        <a href="./">Hjem</a><br>
+        <a href="tjenester.html">Tjenester</a><br>
+        <a href="kunder.html">Kunder</a>
+      </div>
+    </div>
+    <div class="footer-bottom">© 2025 MinBigård – Alle rettigheter forbeholdt</div>
+  </footer>
+ 
+  <script>
+    (function () {
+      var form = document.getElementById('orderForm');
+      var statusEl = document.getElementById('orderStatus');
+      var submitButton = document.getElementById('submitButton');
+ 
+      function setStatus(message, type) {
+        statusEl.textContent = message || '';
+        statusEl.className = 'order-status' + (type ? (' ' + type) : '');
+      }
+ 
+      function setBusy(isBusy) {
+        submitButton.disabled = isBusy;
+        submitButton.textContent = isBusy ? 'Sender…' : 'Bestill og opprett';
+      }
+ 
+      function serialize() {
+        var data = new FormData(form);
+        return {
+          company: {
+            name: String(data.get('companyName') || '').trim(),
+            orgNumber: String(data.get('orgNumber') || '').trim(),
+            address: String(data.get('address') || '').trim(),
+            postalCode: String(data.get('postalCode') || '').trim(),
+            city: String(data.get('city') || '').trim()
+          },
+          contact: {
+            name: String(data.get('contactName') || '').trim(),
+            email: String(data.get('contactEmail') || '').trim(),
+            phone: String(data.get('contactPhone') || '').trim()
+          },
+          package: String(data.get('package') || '').trim(),
+          acceptedTerms: Boolean(data.get('acceptTerms'))
+        };
+      }
+ 
+      function validate() {
+        if (!form.checkValidity()) {
+          setStatus('Sjekk at alle felter er fylt ut korrekt.', 'error');
+          return false;
+        }
+        return true;
+      }
+ 
+      form.addEventListener('submit', function (e) {
+        e.preventDefault();
+        setStatus('', '');
+ 
+        if (!validate()) {
+          return;
+        }
+ 
+        var payload = serialize();
+        setBusy(true);
+ 
+        fetch('/api/create-order', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(payload)
+        })
+          .then(function (res) {
+            if (res.ok) return res.json().catch(function () { return {}; });
+            return res.json().catch(function () { return {}; }).then(function (body) {
+              var errorMessage = (body && (body.message || body.error)) ? String(body.message || body.error) : 'Noe gikk galt. Prøv igjen, eller ta kontakt.';
+              throw new Error(errorMessage);
+            });
+          })
+          .then(function () {
+            form.setAttribute('hidden', 'hidden');
+            setStatus('Takk! Din bedriftsbigård er opprettet. Sjekk e-posten din for tilgang.', 'success');
+          })
+          .catch(function (err) {
+            setStatus(err && err.message ? err.message : 'Noe gikk galt. Prøv igjen, eller ta kontakt.', 'error');
+          })
+          .finally(function () {
+            setBusy(false);
+          });
+      });
+    })();
+  </script>
+</body>
+</html>
