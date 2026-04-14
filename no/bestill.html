@@ -160,8 +160,29 @@
       }
  
       function validate() {
+        var companyNameEl = document.getElementById('companyName');
+        var orgNumberEl = document.getElementById('orgNumber');
+        var addressEl = document.getElementById('address');
+        var postalCodeEl = document.getElementById('postalCode');
+        var cityEl = document.getElementById('city');
+        var contactNameEl = document.getElementById('contactName');
+        var contactEmailEl = document.getElementById('contactEmail');
+        var contactPhoneEl = document.getElementById('contactPhone');
+        var packageEl = document.getElementById('package');
+
+        companyNameEl.value = companyNameEl.value.trim();
+        orgNumberEl.value = orgNumberEl.value.replace(/\s+/g, '').trim();
+        addressEl.value = addressEl.value.trim();
+        postalCodeEl.value = postalCodeEl.value.replace(/\s+/g, '').trim();
+        cityEl.value = cityEl.value.trim();
+        contactNameEl.value = contactNameEl.value.trim();
+        contactEmailEl.value = contactEmailEl.value.trim();
+        contactPhoneEl.value = contactPhoneEl.value.trim();
+        packageEl.value = packageEl.value.trim();
+
         if (!form.checkValidity()) {
           setStatus('Sjekk at alle felter er fylt ut korrekt.', 'error');
+          form.reportValidity();
           return false;
         }
         return true;
@@ -195,7 +216,12 @@
             setStatus('Takk! Din bedriftsbigård er opprettet. Sjekk e-posten din for tilgang.', 'success');
           })
           .catch(function (err) {
-            setStatus(err && err.message ? err.message : 'Noe gikk galt. Prøv igjen, eller ta kontakt.', 'error');
+            var rawMessage = err && err.message ? String(err.message) : '';
+            var message = rawMessage;
+            if (!message || message === 'Failed to fetch') {
+              message = 'Kunne ikke nå /api/create-order. Sjekk at backend er publisert og at minbigard.no ruter /api/create-order til backend.';
+            }
+            setStatus(message, 'error');
           })
           .finally(function () {
             setBusy(false);
