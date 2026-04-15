@@ -145,15 +145,19 @@
       function serialize() {
         var data = new FormData(form);
         return {
-          firmanavn: String(data.get('firmanavn') || '').trim(),
-          orgnr: String(data.get('orgnr') || '').trim(),
-          adresse: String(data.get('adresse') || '').trim(),
-          postnummer: String(data.get('postnummer') || '').trim(),
-          sted: String(data.get('sted') || '').trim(),
-          kontaktperson: String(data.get('kontaktperson') || '').trim(),
-          epost: String(data.get('epost') || '').trim(),
-          telefon: String(data.get('telefon') || '').trim(),
-          pakke: String(data.get('pakke') || '').trim()
+          company: {
+            name: String(data.get('firmanavn') || '').trim(),
+            org_number: String(data.get('orgnr') || '').trim(),
+            address: String(data.get('adresse') || '').trim(),
+            postal_code: String(data.get('postnummer') || '').trim(),
+            city: String(data.get('sted') || '').trim()
+          },
+          contact: {
+            name: String(data.get('kontaktperson') || '').trim(),
+            email: String(data.get('epost') || '').trim(),
+            phone: String(data.get('telefon') || '').trim()
+          },
+          package: String(data.get('pakke') || '').trim()
         };
       }
  
@@ -198,7 +202,7 @@
         var payload = serialize();
         setBusy(true);
  
-        fetch('https://staging.lekbie.no/api/opprett-kunde', {
+        fetch('https://staging.lekbie.no/api/create-order', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify(payload)
