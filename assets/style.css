@@ -19,7 +19,7 @@ body {
   align-items: center;
   justify-content: space-between;
   gap: 16px;
-  padding: 14px 0;
+  padding: 14px 20px;
 }
 
 .logo a {
