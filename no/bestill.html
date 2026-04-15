@@ -213,10 +213,12 @@
                 window.location.href = body.redirectUrl;
                 return;
               }
+              console.error('create-order failed', { httpStatus: res.status, body: body });
               throw new Error('Kunne ikke opprette, prøv igjen');
             });
           })
           .catch(function (err) {
+            console.error('create-order error', err);
             setStatus('Kunne ikke opprette, prøv igjen', 'error');
             setBusy(false);
           })
